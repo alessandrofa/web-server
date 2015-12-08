@@ -2,17 +2,7 @@ var express = require('express');
 var app = express();
 var PORT = 3000;
 
-var middleware = {
-	requiresAuthentication: function (req, res, next) {
-		console.log('Private information used');
-		next();
-	},
-	logger: function (req, res, next) {
-		var now = new Date();
-		console.log('Request (' + now.toString() + '):' + req.method + ' - ' + req.originalUrl);
-		next();
-	}
-};
+var middleware = require('./middleware.js');
 
 app.get('/about', middleware.requiresAuthentication, function (req, res) {
 	res.send('About us!');
